@@ -1,0 +1,324 @@
+{% extends "base.html" %}
+
+{% block  content %}
+   <!-- NAVBAR HERE -->
+  {% include "includes/nav_bar.html" %}
+
+  <main class="main">
+
+    {% if hr %}
+      <!-- Hero Section -->
+      <section id="hero" class="hero section dark-background">
+
+          <div class="hero-container">
+            <video autoplay="" muted="" loop="" playsinline="" class="video-background">
+              <source src="{{hr.video.url}}" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-lg-7" data-aos="zoom-out" data-aos-delay="100">
+                  <div class="hero-content">
+                    <h1>{{hr.title}}</h1>
+                    <p>{{hr.message}}</p>
+                    <div class="cta-buttons">
+                      <a href="{% url "general:program" %}" class="btn-primary">Decouvrez Nos Programmes</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-5" data-aos="zoom-out" data-aos-delay="200">
+                  <div class="stats-card">
+                    <div class="stats-header">
+                      <h3>Pourquoi Nous Choisir</h3>
+                      <div class="decoration-line"></div>
+                    </div>
+                    <div class="stats-grid">
+                      <div class="stat-item">
+                        <div class="stat-icon">
+                          <i class="bi bi-trophy-fill"></i>
+                        </div>
+                        <div class="stat-content">
+                          <h4>98%</h4>
+                          <p>Reussite</p>
+                        </div>
+                      </div>
+                      <div class="stat-item">
+                        <div class="stat-icon">
+                          <i class="bi bi-building"></i>
+                        </div>
+                        <div class="stat-content">
+                          <h4>{{program_count}}+</h4>
+                          <p>Programmes d'Etude</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-ticker">
+            <div class="container">
+              <div class="row gy-4">
+
+                <div class="col-md-6 col-xl-4 col-12 ticker-item">
+                  <span class="date">{{hr.open_date|date:"M d Y"}}</span>
+                  <span class="title">Ouverture</span>
+                
+                </div>
+
+                <div class="col-md-6 col-12 col-xl-4  ticker-item">
+                  <span class="date">{{hr.register_date|date:"M d Y"}}</span>
+                  <span class="title">Date d'Inscription</span>
+                  {% comment %} <a href="#" class="btn-register">Register</a> {% endcomment %}
+                </div>
+
+                <div class="col-md-6 col-12 col-xl-4 ticker-item">
+                  <span class="date">{{hr.close_date|date:"M d Y"}}</span>
+                  <span class="title">Date de cloture</span>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        
+      </section><!-- /Hero Section -->
+    {% endif %}
+
+    {% if about  %}
+      <!-- About Section -->
+      <section id="about" class="about section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row mb-5">
+            <div class="col-lg-6 pe-lg-5" data-aos="fade-right" data-aos-delay="200">
+              <h2 class="display-6 fw-bold mb-4">A Propos  <span> de Nous</span></h2>
+            
+                <p class="lead mb-4"> {{about.description|truncatewords:20|safe}} </p>
+            
+
+              <div class="d-flex flex-wrap gap-4 mb-4">
+                <div class="stat-box">
+                  <span class="stat-number"><span data-purecounter-start="0" data-purecounter-end="{{year}}" data-purecounter-duration="2" class="purecounter"></span>+</span>
+                  <span class="stat-label">Années</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-number"><span data-purecounter-start="0" data-purecounter-end="{{students}}" data-purecounter-duration="2" class="purecounter"></span>+</span>
+                  <span class="stat-label">Elèves</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-number"><span data-purecounter-start="0" data-purecounter-end="{{option}}" data-purecounter-duration="2" class="purecounter"></span>+</span>
+                  <span class="stat-label">Options</span>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center mt-4 signature-block">
+                {% if principal %}
+                  
+                    <div class="ms-3">
+                      <p class="mb-0 fw-bold">  {{principal.title}} {{principal.firstname}}   {{principal.name}} </p>
+                      <p class="mb-0 text-muted">Principal</p>
+                    </div>
+              
+                {% endif %}
+              </div>
+            </div>
+      
+            <div class="col-lg-5" data-aos="fade-left" data-aos-delay="300">
+              <div class="image-stack">
+                <div class="image-stack-item image-stack-item-top" data-aos="zoom-in" data-aos-delay="400">
+                  <img src="{{about.image.url}}" alt="{{about.image}}" class="img-fluid rounded-4 shadow-lg">
+                </div>
+                <div class="image-stack-item image-stack-item-bottom" data-aos="zoom-in" data-aos-delay="500">
+                  <img src="{{about.image_2.url}}" alt="{{about.image}}" class="img-fluid rounded-4 shadow-lg">
+                </div>
+              </div>
+            </div>
+          
+          </div>
+            <div class="row mission-vision-row g-4">
+              <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="value-card h-100">
+                  <div class="card-icon">
+                    <i class="bi bi-rocket-takeoff"></i>
+                  </div>
+                  <h3>Notre Mission</h3>
+                  <p>{{about.mission|truncatewords:20|safe}}</p>
+                </div>
+              </div>
+              <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="value-card h-100">
+                  <div class="card-icon">
+                    <i class="bi bi-eye"></i>
+                  </div>
+                  <h3>Notre Vision</h3>
+                  <p>{{about.vision|truncatewords:20|safe}}</p>
+                </div>
+              </div>
+              <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="value-card h-100">
+                  <div class="card-icon">
+                    <i class="bi bi-star"></i>
+                  </div>
+                  <h3>Nos Valeurs</h3>
+                  <p>{{about.values|truncatewords:20|safe}}</p>
+                </div>
+              </div>
+            </div>
+      
+        </div>
+
+      </section><!-- /About Section -->
+    {% endif %}
+
+    {% if program %}
+      <!-- Featured Programs Section -->
+      <section id="featured-programs" class="featured-programs section">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Programmes phares 🎓</h2>
+          <p>Prenez par   a nos programmes et devenez meilleur dans le monde de demain</p>
+        </div><!-- End Section Title -->
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+            <div class="row g-4 isotope-container">
+
+              {% for prog  in  program %}
+                <div class="col-lg-6 isotope-item filter-bachelor" data-aos="zoom-in" data-aos-delay="100">
+                  <div class="program-item">
+
+                    <div class="program-badge"> {{prog.level}} </div>
+
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <div class="program-image-wrapper">
+                          <img src="{{prog.image.url}}" class="img-fluid" alt="{{prog.image}}">
+                        </div>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="program-content">
+                          <h3> {{ prog.title }} </h3>
+                          <div class="program-highlights">
+                            <span><i class="bi bi-clock"></i> {{ prog.duration }} </span>
+                            <span><i class="bi bi-people-fill"></i> {{ prog.credit }} credit{{ prog.credit|pluralize:"s" }} </span>
+                          </div>
+                          <p> {{ prog.description|truncatewords:20|safe }} </p> 
+                          <a href="{% url "general:show_program" prog.id %}" class="program-btn"><span> Detail</span> <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End Program Item -->
+              {% endfor %}
+
+            </div>
+          </div>
+
+        </div>
+
+      </section><!-- /Featured Programs Section -->
+    {% endif %}
+
+    {% if testimonial %}
+      <!-- Testimonials Section -->
+      <section id="testimonials" class="testimonials section">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Temoignages</h2>
+          <p>Suivez quelque Temoignage faite par le monde à notre propos</p>
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+          <div class="testimonial-masonry">
+
+            {% for testi in testimonial %}
+            <div class="testimonial-item highlight" data-aos="fade-up" data-aos-delay=" {{forloop.counter|add:"1"}}00">
+              <div class="testimonial-content">
+                <div class="quote-pattern">
+                  <i class="bi bi-quote"></i>
+                </div>
+                <p> {{testi.content|safe}} </p>
+                <div class="client-info">
+                  <div class="client-image">
+                    <img src="{{testi.image.url}}" alt="Client">
+                  </div>
+                  <div class="client-details">
+                    <h3> {{testi.fullname}} </h3>
+                    <span class="position"> {{testi.role}} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+        </div>
+
+      </section><!-- /Testimonials Section -->
+    {% endif %}
+
+    {% if actuality %}
+      <!-- Events Section -->
+      <section id="events" class="events section"> 
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Evennements</h2>
+          <p> Decouvrez les evenement marquant a venir et passez de notre ecole</p>
+        </div><!-- End Section Title -->
+        
+        
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+              <!-- category here -->
+              <div class="row g-4">
+                {% for act in actuality  %}
+                  <div class="col-lg-6">
+                    <div class="event-card">
+                      <div class="event-date">
+                        <span class="month"> {{act.date|date:"M"}} </span>
+                        <span class="day">  {{act.date|date:"d"}} </span>
+                        <span class="year"> {{act.date|date:"Y"}}</span>
+                      </div>
+                      <div class="event-content">
+                        <div class="event-tag academic"> {{act.get_category_display}} </div>
+                        <h3> {{act.title}} </h3>
+                        <p> {{act.description|truncatewords:25}} </p>
+                        <div class="event-meta">
+                          <div class="meta-item">
+                            <i class="bi bi-clock"></i>
+                            <span>  {{act.date|time:"H:i T"}} - {{act.end|time:"H:i T"}}</span>
+                          </div>
+                          <div class="meta-item">
+                            <i class="bi bi-geo-alt"></i>
+                            <span>  {{act.place}}</span>
+                          </div>
+                        </div>
+                        <div class="event-actions">
+                          <a href="  {% url "general:show_event" act.id %}"   class="btn-learn-more"> Lire plus</a>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+              {% endfor %}
+              </div>
+
+              <div class="text-center mt-5">
+                <a href="{% url "general:event" %} " class="btn-view-all">Voir tout</a>
+              </div>
+
+            </div>
+        
+
+      </section><!-- /Events Section -->
+    {% endif %}
+  </main>
+
+  <!-- ======= Footer ======= -->
+{% include "includes/foot.html" %}
+
+{% endblock  %}

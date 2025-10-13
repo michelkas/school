@@ -1,0 +1,16 @@
+asgiref==3.9.1
+dj-database-url==3.0.1
+Django==5.2.5
+django-crispy-forms==2.4
+django-heroku==0.3.1
+django-js-asset==3.1.2
+django-phonenumber-field==8.1.0
+django-tinymce==4.1.0
+gunicorn==23.0.0  
+packaging==25.0
+phonenumbers==9.0.12
+pillow==11.3.0
+psycopg2==2.9.11
+sqlparse==0.5.3
+tzdata==2025.2
+whitenoise==6.11.0

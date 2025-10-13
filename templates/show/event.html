@@ -1,0 +1,143 @@
+{% extends "base.html" %}                                                                                   
+
+{% block content  %}
+    <!-- NAVBAR HERE -->
+  {% include "includes/nav_bar.html" %}
+
+
+    <main class="main">
+
+      <!-- Page Title -->
+
+      <div class="page-title dark-background" style="background-image: url({{event.image.url}});">
+        <div class="container position-relative">
+          <h1>{{event.title}}</h1>
+          <nav class="breadcrumbs">
+            <ol>
+              <li><a href="{% url "general:event" %}">Evenemens</a></li>
+              <li class="current">{{event.title}}</li>
+            </ol>
+          </nav>
+        </div>
+      </div><!-- End Page Title -->
+
+      <!-- Event Section -->
+      <section id="event" class="event section">
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="event-image mb-4" data-aos="fade-up">
+                <img src="{{event.image.url}}" alt="Event" class="img-fluid rounded">
+              </div>
+
+              <div class="event-meta mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <div class="meta-item">
+                      <i class="bi bi-calendar-date"></i>
+                      <span> {{event.date|date:" Y M d"}} </span>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="meta-item">
+                      <i class="bi bi-clock"></i>
+                      <span>{{event.date|date:"H:i T"}} - {{event.end|date:"H:i T"}} </span>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="meta-item">
+                      <i class="bi bi-geo-alt"></i>
+                      <span> {{event.place}} </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="event-content" data-aos="fade-up" data-aos-delay="200">
+                <p> {{event.description|safe}} </p>
+
+              
+              {% comment %}  {% endcomment %}
+                {% comment %} <div class="event-gallery mt-5" data-aos="fade-up" data-aos-delay="300"> {% endcomment %}
+                  {% comment %} <h3>Event Gallery</h3> {% endcomment %}
+                  {% comment %} <p>Images from previous year's science exhibition:</p> {% endcomment %}
+                  {% comment %} <div class="row g-4 mt-2"> {% endcomment %}
+                    {% comment %} <div class="col-md-4"> {% endcomment %}
+                      {% comment %} <a href="assets/img/education/events-1.webp" class="glightbox"> {% endcomment %}
+                        {% comment %} <img src="assets/img/education/events-1.webp" alt="Event Gallery" class="img-fluid rounded"> {% endcomment %}
+                      {% comment %} </a> {% endcomment %}
+                    {% comment %} </div> {% endcomment %}
+                    {% comment %} <div class="col-md-4"> {% endcomment %}
+                      {% comment %} <a href="assets/img/education/events-2.webp" class="glightbox"> {% endcomment %}
+                        {% comment %} <img src="assets/img/education/events-2.webp" alt="Event Gallery" class="img-fluid rounded"> {% endcomment %}
+                      {% comment %} </a> {% endcomment %}
+                    {% comment %} </div> {% endcomment %}
+                    {% comment %} <div class="col-md-4"> {% endcomment %}
+                      {% comment %} <a href="assets/img/education/events-3.webp" class="glightbox"> {% endcomment %}
+                        {% comment %} <img src="assets/img/education/events-3.webp" alt="Event Gallery" class="img-fluid rounded"> {% endcomment %}
+                      {% comment %} </a> {% endcomment %}
+                    {% comment %} </div> {% endcomment %}
+                  {% comment %} </div> {% endcomment %}
+                {% comment %} </div> {% endcomment %}
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="event-sidebar">
+              
+
+                <div class="sidebar-widget organizer-info" data-aos="fade-left" data-aos-delay="300">
+                  <h3>Animateur</h3>
+                  <div class="organizer-details">
+                    <div class="organizer-image">
+                      <img src="{{ event.facilitator.user.profiles.avatar.url }}" class="img-fluid rounded" alt="Organizer">
+                    </div>
+                    <div class="organizer-content">
+                      <h4> <a href="{% url "accounts:profile" event.facilitator.user.id %}" class="bold" style="color:black;" > {{ event.facilitator.title }} {{ event.facilitator.name }} {{ event.facilitator.firstname }} </a> </h4>
+                      <p class="organizer-position">{{ event.facilitator.role.all|join:", "}}</p>
+                      <p>Pour des questions et autres, contactez:</p>
+                      <div class="organizer-contact">
+                        <p><i class="bi bi-envelope"></i> {% if event.facilitator.email %}{{event.facilitator.email}}{% endif %}  </p>
+                        <p><i class="bi bi-telephone"></i> {% if event.facilitator.contact %}{{event.facilitator.contact}} {% endif %} </p>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+
+                {% if not relate_event  %}
+                {% else %}
+
+                <div class="sidebar-widget related-events" data-aos="fade-left" data-aos-delay="400">
+                  <h3>Related Events</h3>
+
+                  {% for relate in relate_event  %}
+                      <div class="related-event-item">
+                        <div class="related-event-date">
+                          <span class="day"> {{relate.date|date:"d"}} </span>
+                          <span class="month">{{relate.date|date:"M"}} </span>
+                        </div>
+                        <div class="related-event-info">
+                          <h4> <a href="{% url "general:show_event" relate.id %}" >{{relate.title}}  </a></h4>
+                          <p><i class="bi bi-geo-alt"></i> {{relate.place|safe}}</p>
+                        </div>
+                      </div>
+                  {% endfor %}
+                
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section><!-- /Event Section -->
+
+    </main>
+      <!-- ======= Footer ======= -->
+  {% include "includes/foot.html" %}
+
+{% endblock  %}

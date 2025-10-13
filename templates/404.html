@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <main class="main">
+    <!-- Error 404 Section -->
+    <section id="error-404" class="error-404 section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="error-wrapper">
+          <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
+              <div class="error-illustration">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                <div class="circle circle-1"></div>
+                <div class="circle circle-2"></div>
+                <div class="circle circle-3"></div>
+              </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+              <div class="error-content">
+                <span class="error-badge" data-aos="zoom-in" data-aos-delay="400">ERREUR</span>
+                <h1 class="error-code" data-aos="fade-up" data-aos-delay="500"> {{code}} </h1>
+                <h2 class="error-title" data-aos="fade-up" data-aos-delay="600">{{titre}} </h2>
+                <p class="error-description" data-aos="fade-up" data-aos-delay="700"> {{messages}} </p>
+
+                <div class="error-actions" data-aos="fade-up" data-aos-delay="800">
+                  <a href="/" class="btn-home">
+                    <i class="bi bi-house-door"></i>Retour a l'acceuil
+                  </a>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Error 404 Section -->
+
+  </main>
+{% endblock %}
+ 
+
+

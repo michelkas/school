@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% include "includes/nav_bar.html" %}
+    <main class="about-page">
+      {% if staffs %}
+        <div class="page-title dark-background" style="background-image: url();">
+            <div class="container position-relative">
+              <h1>Staff</h1>
+              <p>Decouvrez notre Equipe</p>
+              <nav class="breadcrumbs">
+                <ol>
+                  <li><a href="{% url "general:index" %} ">Acceuil</a></li>
+                  <li class="current">Staff</li>
+                </ol>
+              </nav>
+            </div>
+        </div>
+        <!-- Leadership Section -->
+        <section id="leadership" class="leadership section">
+
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="leadership-team">
+
+              <div class="row">
+                {% for staff in staffs %}
+                  <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="leader-card">
+                      <div class="leader-image">
+                        <img src="{{staff.user.profiles.avatar.url}}" alt="Principal" class="img-fluid">
+                      </div>
+                      <div class="leader-info">
+                        <h4> <a href="{% url "accounts:profile" staff.user.id %}" class="profile-link"> {{staff.title}} {{staff.firstname}} {{staff.name}} </a> </h4>
+                  
+                        <p class="faculty-title" >{{ staff.role.all|join:", "}}</p>
+                      
+                        {% if staff.user.profiles.bio  %}
+                        <p class="bio">{{staff.user.profiles.bio}}</p>
+                        {% else %}
+                        <p class="bio"></p>
+                        {% endif %}
+                      </div>
+                    </div>
+                  
+                  </div>
+                {% endfor %}
+              </div>
+
+                <div class="pagination-wrapper" data-aos="fade-up" data-aos-delay="400">
+                  <ul class="pagination justify-content-center">
+                    {% if staffs.has_previous  %}
+                      <li class="page-item active"><a class="page-link" href="?page={{staffs.previous_page_number}}" ><i class="bi bi-chevron-left"></i></a></li>
+                      <li class="page-item "><a class="page-link" href="">{{staffs.previous_page_number}}</a></li>
+                    {% endif %}
+                      <li class="page-item "><a class=" btn btn-info" style="border-radius:0%;" href="?page={{staffs.number}} ">{{staffs.number}}</a></li>
+                    {% if staffs.has_next  %}
+                    <li class="page-item"><a class="page-link" href="">{{staffs.next_page_number}}</a></li>
+                      <li class="page-item active"><a class="page-link" href="?page= {{staffs.next_page_number}} "><i class="bi bi-chevron-right"></i></a></li>
+                    {% endif %}
+                  </ul>
+                </div>
+
+            </div>
+          </div>
+        </section><!-- /Leadership Section -->
+      {% endif %}
+    </main>
+  {% include "includes/foot.html" %}
+{% endblock  %}

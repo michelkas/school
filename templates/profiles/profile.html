@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+        <a href="{% url "general:index" %}" class="logo d-flex align-items-center">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/img/logo.webp" alt=""> -->
+          <i class="bi bi-arrow-left text-warning fs-5"></i>
+      
+        </a>
+        {% if user.is_authenticated and user.id == profile.id %}
+              <nav id="navmenu" class="navmenu">
+                <ul>
+                  {% if staff %}
+                    {% if user.is_authenticated and user.id == profile.id and caisse   %}
+                        <li><a href="{% url "finance:index_finance" %}">caisse </a></li>
+                    {% endif %}
+                  {% endif %}
+                      <li><a href="{% url "accounts:logout" %}" class="text-danger">Deconnexion</a></li>
+                      {% if is_staff %}  <li><a href="{% url "admin:index" %}">Configuration</a></li>{% endif %}
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list auto"></i>
+              </nav>
+              {% else %}
+
+        {% endif %}
+      </div>
+    </header>
+
+    <div class="container-fluid p-0 position-relative">
+    <div class="page-title dark-background" style="max-height:20px; background: black;" ></div>
+    {% if profile %}
+      <img src="{{profile.avatar.url}} " alt="Avatar" class="rounded-circle border border-white position-absolute" style="width:120px; bottom:-60px; left:20px;">
+    {% endif %}
+    </div>
+
+    <!-- Info utilisateur -->
+    <section class="container  ms-auto mt-auto">
+      <div class="d-flex justify-content-between align-items-start "  >
+        <div>
+          {% if staff %}
+            <h2 class="mb-1"> {{ staff.title|capfirst }} {{ staff.name|capfirst }} {{ staff.firstname|capfirst }}</h2>
+            <h6 class="text-muted ">  <span class="bi bi-mortarboard"></span> {{staff.degree|capfirst }}  en  {{staff.faculty|capfirst }}</h6>
+            <h6 class="text-muted ">  <span class="bi bi-briefcase"></span> {{staff.role.all|join:", "}} </h6>
+            {% else %}
+                {% if user.first_name and user.last_name  %}
+                  <h2 class="mb-1"> {{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</h2>
+                  {% else %}
+                    <h2 class="mb-1"> {{ user.username|capfirst }} </h2>
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+        <div>
+          {% if user.is_authenticated and user.id == profile.id %}
+        <a href="{% url "accounts:edit_profile" user.id %}" class="btn btn-outline-secondary me-2" >Modifier le profil</a>
+          {% endif %}
+        </div>
+      
+      </div>
+      {% if profile %}
+      <p class="mt-2" > {% if profile.bio %}{{profile.bio}}{% endif %}</p>
+      {% endif %}
+
+      <!-- Statistiques -->
+      
+
+      <!-- Onglets -->
+    
+
+    
+      {% if staff %}
+        {% if cours %}
+          <div class="row">
+            <div class="col-lg-3" data-aos="fade-up" data-aos-delay="300">
+              <div class="departments-nav">
+                
+                  <ul class="nav nav-tabs">
+                  <li class="nav-item" ><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#faculty--staff-tab-1">Attribution de cours</button></li>
+                  </ul>
+              </div>
+            </div>
+
+            <div class="cards" data-aos="fade-up" data-aos-delay="400">
+              <div class="tab-content">
+
+                <div class="tab-pane fade  show active " id="faculty--staff-tab-1">
+                  <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                      <div class="faculty-card">
+                      
+
+                          {% for cour in cours  %}
+                            <div class="faculty-info">
+                              <div class="faculty-specialties">
+                                        <p class="faculty-title"> {{cour.course.all|join:", "|capfirst}} --- <span> {{cour.classe.all|join:", "|capfirst}} </span>  --- <span> {{cour.section|capfirst}} </span> --- <span> {% if cour.option %}{{cour.option|capfirst}} {% endif %} </span>  </p>
+                              </div>
+                            </div>
+                          {% endfor %} 
+                        
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            
+          </div>
+
+        
+        {% endif %}
+      {% endif %}
+  
+          </section>
+
+    
+  {% include "includes/foot.html" %}
+
+{% endblock  %}
+

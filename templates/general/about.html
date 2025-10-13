@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% include "includes/nav_bar.html" %}
+
+    <main class="main">
+      {% if about %}
+          <!-- Page Title -->
+          
+            <div class="page-title dark-background" style="background-image: url({{about.image.url}});">
+              <div class="container position-relative">
+                <h1>A propos</h1>
+                <p>Decouvrez nos marques</p>
+                <nav class="breadcrumbs">
+                  <ol>
+                    <li><a href="{% url "general:index" %} ">Acceuil</a></li>
+                    <li class="current">A propos</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+        
+          <!-- End Page Title -->
+
+          <!-- History Section -->
+          <section id="history" class="history section">
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+              
+                <div class="row align-items-center g-5">
+                  <div class="col-lg-6">
+                    <div class="about-content" data-aos="fade-up" data-aos-delay="200">
+                      <h3> Résumé</h3>
+                      <h2></h2>
+                      <p>{{about.description|safe}}</p>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="about-image" data-aos="zoom-in" data-aos-delay="300">
+                      <img src="{{about.image_2.url}}" alt="Campus" class="img-fluid rounded">
+
+                      <div class="mission-vision" data-aos="fade-up" data-aos-delay="400">
+                        <div class="mission">
+                          <h3>Notre Mission</h3>
+                          <p>{{about.mission|safe}}</p>
+                        </div>
+
+                        <div class="vision">
+                          <h3>Notre Vision</h3>
+                          <p>{{about.vision|safe}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <div class="row mt-5">
+                <div class="col-lg-12">
+                  <div class="core-values" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="text-center mb-4">Nos Valeurs</h3>
+                    <div class="row row-cols-1 row-cols-md-4 row-cols-lg-4 g-4">
+                    
+                        <div class="col-lg-12">
+                          <div class="value-card">
+                            <div class="value-icon">
+                              <i class="bi bi-star"></i>
+                            </div>
+                            <p>{{about.values|safe}}</p>
+                          </div>
+                        </div>
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </section><!-- /History Section -->
+
+
+
+      {% endif %}
+
+      {% if staffs %}
+          <!-- Leadership Section -->
+          <section id="leadership" class="leadership section">
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+            
+                <div class="row mb-5">
+                  <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
+                    <h3 class="section-subtitle">Recontrez nos leader </h3>
+                    <h2 class="section-heading">Une Administration dévouée qui guide notre Excellence Educative</h2>
+                    <p class="section-description">Notre équipe administrative est composée de professionnels passionnés et expérimentés qui veillent à assurer la qualité et la continuité de notre mission éducative. Leur engagement constant permet d’offrir un environnement d’apprentissage structuré, innovant et centré sur l’élève. Grâce à leur leadership, nous construisons chaque jour une institution solide, capable de relever les défis actuels et futurs de l’éducation.
+
+                    </p>
+                
+                    <div class="stats-container mt-4">
+                      <div class="row">
+                        <div class="col-md-4 col-6">
+                          <div class="stat-item">
+                            <h3>{{ year}}+</h3>
+                            <p>Ans d'Excellence</p>
+                          </div>
+                        </div>
+                        <div class="col-md-4 col-6">
+                          <div class="stat-item">
+                            <h3> {{staff_count}} +</h3>
+                            <p> Membres</p>
+                          </div>
+                        </div>
+                        <div class="col-md-4 col-6">
+                          <div class="stat-item">
+                            <h3>98%</h3>
+                            <p>Reussite d'Elèves</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  
+
+                  {% if about %}
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+                      <div class="about-image">
+                        {% if about.team %}
+                          <img src="{{about.team.url}}" alt="Our Leadership Team" class="img-fluid rounded">
+                          {% else %}
+                          <p>-</p>
+                          {% endif %}
+                      </div>
+                    </div>
+                  {% endif %} 
+                </div>
+
+              <div class="leadership-team">
+
+                <div class="row">
+                  {% for staff in staffs %}
+                    <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                      <div class="leader-card">
+                        <div class="leader-image">
+                          <img src="{{staff.user.profiles.avatar.url}}" alt="Principal" class="img-fluid">
+                        </div>
+                        <div class="leader-info">
+                          <h4>  {{staff.title}} {{staff.name}} {{staff.first_name}} </h4>
+                    
+                          <p class="faculty-title" >{{ staff.role.all|join:", "}}</p>
+                        
+                          {% if staff.user.profiles.bio  %}
+                          <p class="bio">{{staff.user.profiles.bio}}</p>
+                          {% else %}
+                          <p class="bio"></p>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+
+              </div>
+
+            </div>
+
+          </section><!-- /Leadership Section -->
+      {% endif %}
+    </main>
+
+  {% include "includes/foot.html" %}
+{% endblock  %}
+
