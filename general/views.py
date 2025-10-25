@@ -7,8 +7,6 @@ from django.utils import timezone
 from django.core.paginator import Paginator
 from django.db.models import Count, Sum
 
-def event_404(request):
-    return render(request, 'home/event/404.html')
 
 def index(request):
     context = {

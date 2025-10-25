@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-weh&kt0*qch5fqx7ivv-r*h%en-n@fe%ol3+_yiat^dfyc#51t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1',"[::1]"]
 
@@ -110,25 +110,24 @@ WSGI_APPLICATION = 'school.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-#DATABASES = {
- #   'default': {
+DATABASES = {
+    'default': {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': BASE_DIR / 'db.sqlite3',
 
-  #      'ENGINE': 'django.db.backends.mysql',
-   #     'NAME': 'school_db',
-    #    'USER': 'root',
-     #   'PASSWORD': '',
-      #  'HOST': 'localhost',
-       # 'PORT': '3306',
-   # }
-#}
-
-DATABASES = {
-    'default': dj_database_url.config(
-      
-    )
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'school_db',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
 }
+DATABASES['default'] = dj_database_url.parse("postgresql://db_school_oet6_user:5gefx0lARuSxOPUa6Hr1d52r7HXJUaFJ@dpg-d3uc7lvdiees73e5hdc0-a.oregon-postgres.render.com/db_school_oet6")
+#DATABASES = {
+  #  'default': dj_database_url.config(
+  #  )
+#}
 
 
 # Password validation
