@@ -185,5 +185,3 @@ CACHES = {
         'LOCATION': 'unique-school-cache',
     }
 }
-
-django_heroku.settings(locals())
