@@ -19,7 +19,7 @@
                     {% endif %}
                   {% endif %}
                       <li><a href="{% url "accounts:logout" %}" class="text-danger">Deconnexion</a></li>
-                      {% if is_staff %}  <li><a href="{% url "admin:index" %}">Configuration</a></li>{% endif %}
+                      {% if is_staff or user.is_superuser %}  <li><a href="{% url "admin:index" %}">Configuration</a></li>{% endif %}
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list auto"></i>
               </nav>

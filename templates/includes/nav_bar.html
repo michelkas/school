@@ -55,7 +55,7 @@
                 {% endif %}
                
                   </li>
-                  {% if is_staff %}<li><a href="{% url "students:students_list" %}">Élèves</a></li>{% endif %} 
+                  {% if is_staff or user.is_superuser %}<li><a href="{% url "students:students_list" %}">Élèves</a></li>{% endif %} 
                     <li><a href="{% url "accounts:logout" %}" style="  " class="text-danger">Deconnexion</a></li>
                 {% else %}
                   <li><a href="{% url "accounts:login" %}" style="  " class="title">Connexion</a></li>
