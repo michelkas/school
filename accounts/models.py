@@ -19,7 +19,7 @@ class Profiles(models.Model):
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(null=True, blank=True, max_length= 120)
-    avatar = models.ImageField(upload_to='avatar/', default='avatar/default.jpg', blank=True)
+    avatar = models.ImageField(upload_to='avatar/', default='avatar/default_bcIt09K.jpg', blank=True)
     
     class Meta:
         db_table = 'profiles'
