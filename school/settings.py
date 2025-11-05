@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
 import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-weh&kt0*qch5fqx7ivv-r*h%en-n@fe%ol3+_yiat^dfyc#51t'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',"[::1]"]
+ALLOWED_HOSTS =config("ALLOWED_HOSTS").split(",")
 
 #configuration media
 MEDIA_URL = '/media/'
@@ -123,7 +123,7 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-DATABASES['default'] = dj_database_url.parse("postgresql://db_school_oet6_user:5gefx0lARuSxOPUa6Hr1d52r7HXJUaFJ@dpg-d3uc7lvdiees73e5hdc0-a.oregon-postgres.render.com/db_school_oet6")
+DATABASES['default'] = dj_database_url.parse(config("DATABASE_URL"))
 #DATABASES = {
   #  'default': dj_database_url.config(
   #  )
