@@ -69,6 +69,9 @@ SECURE_BROWSER_XSS_FILTER = True
 ADMIN_SITE_HEADER = "Panneau d'Administration"
 ADMIN_SITE_TITLE = "Panneau d'Administration"
 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

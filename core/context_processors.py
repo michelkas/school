@@ -6,14 +6,14 @@ def core_context(request):
     try:
         core = Core.objects.only('official_name').first()
     except Core.DoesNotExist:
-        core = None
+        core = 'core'
 
     return {"core":core}    
 
 def staff_context(request):
     staff = None
     try:
-        staff = Staff.objects.only('admin').filter(admin=True)
+        staff = Staff.objects.filter(admin=True).exists()
     except Staff.DoesNotExist:
         staff = None
 
