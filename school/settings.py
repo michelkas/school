@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 import dj_database_url
 from decouple import config
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,8 +34,8 @@ DEBUG = config("DEBUG", cast=bool)
 ALLOWED_HOSTS =config("ALLOWED_HOSTS").split(",")
 
 #configuration media
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Application definition
@@ -59,9 +62,9 @@ INSTALLED_APPS = [
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config("CLOUDINARY_CLOUD_NAME"),  
-    'API_KEY': config("CLOUDINARY_API"),
-    'API_SECRET': config("CLOUDINARY_API_SECRET")
+    'CLOUD_NAME':os.getenv("CLOUDINARY_CLOUD_NAME"),  
+    'API_KEY':os.getenv("CLOUDINARY_API"),
+    'API_SECRET':os.getenv("CLOUDINARY_API_SECRET")
 }
 
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
