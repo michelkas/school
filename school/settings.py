@@ -53,8 +53,18 @@ INSTALLED_APPS = [
     'finance',
     'general',
     'tinymce',
+    'cloudinary',
+    'cloudinary_storage'
 ]
 
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config("CLOUDINARY_CLOUD_NAME"),  
+    'API_KEY': config("CLOUDINARY_API"),
+    'API_SECRET': config("CLOUDINARY_API_SECRET")
+}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 #Taille maximale des fichiers uploades(20MB)
 DATA_UPLOAD_MAX_MEMORY_SIZE = 20971520
